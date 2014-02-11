@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2C669425-E778-40F7-AA68-07AA7FF988D4}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Destiny</RootNamespace>
+    <AssemblyName>Destiny</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <ApplicationIcon>DRO.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Main\ClassDataGridViewVisibleScroll.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Main\ClassGlobal.cs" />
+    <Compile Include="Main\Config\FormConfiguration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\Config\FormConfiguration.Designer.cs">
+      <DependentUpon>FormConfiguration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main\Data\FormItemPatchGenerator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\Data\FormItemPatchGenerator.designer.cs">
+      <DependentUpon>FormItemPatchGenerator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main\Data\FormItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\Data\FormItem.Designer.cs">
+      <DependentUpon>FormItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main\Data\FormItemJob.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\Data\FormItemJob.Designer.cs">
+      <DependentUpon>FormItemJob.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main\Data\FormItemLocation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\Data\FormItemLocation.Designer.cs">
+      <DependentUpon>FormItemLocation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main\Data\FormItemType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\Data\FormItemType.Designer.cs">
+      <DependentUpon>FormItemType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main\Data\FormMD5.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\Data\FormMD5.Designer.cs">
+      <DependentUpon>FormMD5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main\Data\FormNPC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\Data\FormNPC.Designer.cs">
+      <DependentUpon>FormNPC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main\MDIDestiny.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\MDIDestiny.Designer.cs">
+      <DependentUpon>MDIDestiny.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MDI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MDI.Designer.cs">
+      <DependentUpon>MDI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Main\Config\FormConfiguration.resx">
+      <DependentUpon>FormConfiguration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\Data\FormItemPatchGenerator.resx">
+      <DependentUpon>FormItemPatchGenerator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\Data\FormItem.resx">
+      <DependentUpon>FormItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\Data\FormItemJob.resx">
+      <DependentUpon>FormItemJob.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\Data\FormItemLocation.resx">
+      <DependentUpon>FormItemLocation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\Data\FormItemType.resx">
+      <DependentUpon>FormItemType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\Data\FormMD5.resx">
+      <DependentUpon>FormMD5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\Data\FormNPC.resx">
+      <DependentUpon>FormNPC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\MDIDestiny.resx">
+      <DependentUpon>MDIDestiny.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MDI.resx">
+      <DependentUpon>MDI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DRO.ico" />
+    <Content Include="Main\Data\TextFileItem.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

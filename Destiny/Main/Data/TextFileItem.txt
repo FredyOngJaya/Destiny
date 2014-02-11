@@ -1,0 +1,92 @@
+﻿ID,Name,Name,Type,
+Price,Sell,Weight,
+ATK,DEF,Range,Slot,
+Job,Upper,Gender,Loc,
+wLV,eLV,Refineable,View,
+{ Script },{ OnEquip_Script },{ OnUnequip_Script }
+
+type
+0 = Usable : healing
+2 = Usable : other
+3 = Misc
+4 = Weapon
+5 = Armor
+6 = Card
+7 = Pet Egg
+8 = Pet Equipment
+10 = Arrow/Ammunition
+11 = Usable : delayed consumption (items with script "pet" or "itemskill")
+
+job
+(S.) Novice         (2^00): 0x00000001
+Swordman            (2^01): 0x00000002
+Mage                (2^02): 0x00000004
+Archer              (2^03): 0x00000008
+Acolyte             (2^04): 0x00000010
+Merchant            (2^05): 0x00000020
+Thief               (2^06): 0x00000040
+Knight              (2^07): 0x00000080
+Priest              (2^08): 0x00000100
+Wizard              (2^09): 0x00000200
+Blacksmith          (2^10): 0x00000400
+Hunter              (2^11): 0x00000800
+Assassin            (2^12): 0x00001000
+Unused              (2^13): 0x00002000
+Crusader            (2^14): 0x00004000
+Monk                (2^15): 0x00008000
+Sage                (2^16): 0x00010000
+Rogue               (2^17): 0x00020000
+Alchemist           (2^18): 0x00040000
+Bard/Dancer         (2^19): 0x00080000
+Unused              (2^20): 0x00100000
+Taekwon             (2^21): 0x00200000
+StarGladiator       (2^22): 0x00400000
+Soul Linker         (2^23): 0x00800000
+Gunslinger          (2^24): 0x01000000
+Ninja               (2^25): 0x02000000
+All Classes               : 0xFFFFFFFF
+Every Job Except Novice   : 0xFFFFFFFE
+
+upper
+1 = Normal
+2 = Reborn Classes (High Wizards, Champions etc.) (includes 3rd classes)
+4 = Baby Classes
+8 = 3rd Classes
+
+gender
+0 = Female
+1 = Male
+2 = No restriction (both)
+
+location
+(2^0)      1 = Lower headgear
+(2^1)      2 = Right hand
+(2^2)      4 = Mantle
+(2^3)      8 = Accessory 1
+(2^4)     16 = Armor
+(2^5)     32 = Left hand
+(2^6)     64 = Shoes
+(2^7)    128 = Accessory 2
+(2^8)    256 = Upper headgear
+(2^9)    512 = Middle headgear
+(2^10)  1024 = Styles Upper headgear
+(2^11)  2048 = Styles Middle headgear
+(2^12)  4096 = Styles Lower headgear
+(2^15) 32768 = Arrow (arrow-type items only)
+
+Effect
+10000 = 100%
+Eff_Stone	0
+Eff_Freeze	1
+Eff_Stun	2
+Eff_Sleep	3
+Eff_Poison	4
+Eff_Curse	5
+Eff_Silence	6
+Eff_Confusion	7
+Eff_Blind	8
+Eff_Bleeding	9
+Eff_DPoison	10
+Eff_Fear	309
+Eff_Burning	310
+
