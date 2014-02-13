@@ -20,15 +20,19 @@ namespace Destiny.Main.Data
         NumberStyles _NumberStyle = NumberStyles.AllowDecimalPoint;
         CultureInfo _Culture = CultureInfo.CreateSpecificCulture("en-US");
 
-        public string result { get; set; }
+        public string result { get; private set; }
+        public int slot { get; private set; }
+        public string position { get; private set; }
 
         public FormItem()
         {
             InitializeComponent();
             this.result = "";
+            this.slot = 0;
+            this.position = "";
         }
 
-        public FormItem(int ItemID, string ItemName, int Slot, int ViewID)
+        public FormItem(int ItemID, string ItemName, int ViewID)
         {
             InitializeComponent();
             this.result = "";
@@ -38,10 +42,13 @@ namespace Destiny.Main.Data
             textBoxPriceBuy.Text = "20";
             textBoxWeightReal.Text = "50";
             numericUpDownRange.Value = -1;
-            numericUpDownSlot.Value = Slot;
+            numericUpDownSlot.Value = 0;
             textBoxJob.Text = "0xFFFFFFFF";
             numericUpDownWeaponLevel.Value = -1;
             numericUpDownView.Value = ViewID;
+            checkedListBoxUpper.SetItemCheckState(0, CheckState.Checked);
+            checkedListBoxUpper.SetItemCheckState(1, CheckState.Checked);
+            checkedListBoxUpper.SetItemCheckState(2, CheckState.Checked);
         }
 
         private void FormItem_Load(object sender, EventArgs e)
@@ -373,7 +380,9 @@ namespace Destiny.Main.Data
                 _script += "},{},{}";
 
                 textBoxScript.Text = _script;
+                slot = (int)numericUpDownSlot.Value;
                 result = _script;
+                position = GetPosition(int.Parse(textBoxLocation.Text));
             }
             catch (Exception ex)
             {
@@ -435,6 +444,25 @@ namespace Destiny.Main.Data
             while (_stack.Count > 0)
             {
                 _result += _stack.Pop();
+            }
+            return _result;
+        }
+
+        private string GetPosition(int location)
+        {
+            string _result = "";
+            location = location & 769;
+            if ((location & 1) == 1)
+            {
+                _result = "Lower";
+            }
+            else if ((location & 512) == 512)
+            {
+                _result = "Middle";
+            }
+            else if ((location & 256) == 256)
+            {
+                _result = "Upper";
             }
             return _result;
         }

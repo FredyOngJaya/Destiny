@@ -205,11 +205,38 @@ namespace Destiny.Main.Data
             }
         }
 
-        private void buttonGenerateScript_Click(object sender, EventArgs e)
+        private void buttonPrepareGrid_Click(object sender, EventArgs e)
         {
             int nextID, nextView;
             if (int.TryParse(textBoxLastID.Text, out nextID) && int.TryParse(textBoxLastView.Text, out nextView))
             {
+                DirectoryInfo dir = new DirectoryInfo(textBoxPathSPRMan.Text);
+                var _file = dir.GetFiles("*.spr");
+                string spr_, spr;
+                dataGridViewSPR.Rows.Clear();
+                foreach (FileInfo file in _file)
+                {
+                    nextID++;
+                    nextView++;
+
+                    spr_ = file.Name.Substring(3, file.Name.LastIndexOf('.') - 3);
+                    spr = spr_.Replace('_', ' ');
+
+                    dataGridViewSPR.Rows.Add(new String[] { nextID.ToString(), spr, nextView.ToString() });
+                }
+            }
+            else
+            {
+                MessageBox.Show("Input next Item ID Number");
+            }
+        }
+
+        private void buttonGenerateScript_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewSPR.Rows.Count > 0)
+            {
+                if (File.Exists(textBoxPathDataGRF.Text + "itemdb.txt"))
+                    File.Delete(textBoxPathDataGRF.Text + "itemdb.txt");
                 if (File.Exists(textBoxPathDataGRF.Text + "idnum2itemdesctable.txt"))
                     File.Delete(textBoxPathDataGRF.Text + "idnum2itemdesctable.txt");
                 if (File.Exists(textBoxPathDataGRF.Text + "idnum2itemdisplaynametable.txt"))
@@ -222,28 +249,30 @@ namespace Destiny.Main.Data
                     File.Delete(textBoxPathLUA.Text + "accessoryid.lua");
                 if (File.Exists(textBoxPathLUA.Text + "accname.lua"))
                     File.Delete(textBoxPathLUA.Text + "accname.lua");
+                StreamWriter itemdb = new StreamWriter(textBoxPathDataGRF.Text + "itemdb.txt", true);
                 StreamWriter itemdesctable = new StreamWriter(textBoxPathDataGRF.Text + "idnum2itemdesctable.txt", true);
                 StreamWriter itemdisplaynametable = new StreamWriter(textBoxPathDataGRF.Text + "idnum2itemdisplaynametable.txt", true);
                 StreamWriter itemrestable = new StreamWriter(textBoxPathDataGRF.Text + "idnum2itemresnametable.txt", true);
                 StreamWriter itemslotcounttable = new StreamWriter(textBoxPathDataGRF.Text + "itemslotcounttable.txt", true);
                 StreamWriter accname = new StreamWriter(textBoxPathLUA.Text + "accname.lua", true);
                 StreamWriter accessoryid = new StreamWriter(textBoxPathLUA.Text + "accessoryid.lua", true);
-                DirectoryInfo dir = new DirectoryInfo(textBoxPathSPRMan.Text);
-                var _file = dir.GetFiles("*.spr");
-                string spr_, spr;
-                dataGridViewSPR.Rows.Clear();
-                foreach (FileInfo file in _file)
+                int nextID, nextView, slot;
+                string spr_, spr, position, script;
+                foreach (DataGridViewRow _row in dataGridViewSPR.Rows)
                 {
-                    nextID++;
-                    nextView++;
+                    nextID = int.Parse(_row.Cells["ID"].Value.ToString());
+                    spr = _row.Cells["SPR"].Value.ToString();
+                    spr_ = spr.Replace(' ', '_');
+                    nextView = int.Parse(_row.Cells["View"].Value.ToString());
+                    position = _row.Cells["Location"].Value.ToString();
+                    slot = int.Parse(_row.Cells["Slot"].Value.ToString());
+                    script = _row.Cells["Script"].Value.ToString();
 
-                    spr_ = file.Name.Substring(3, file.Name.LastIndexOf('.') - 3);
-                    spr = spr_.Replace('_', ' ');
                     itemdesctable.WriteLine(nextID.ToString() + "#");
                     itemdesctable.WriteLine(spr);
                     itemdesctable.WriteLine("Class :^777777 Headgear^000000");
                     itemdesctable.WriteLine("Defense :^777777 0^000000");
-                    itemdesctable.WriteLine("Equipped on :^777777 Upper^000000");
+                    itemdesctable.WriteLine("Equipped on :^777777 " + position + "^000000");
                     itemdesctable.WriteLine("Weight :^777777 50^000000");
                     itemdesctable.WriteLine("Applicable Job :^777777 Every Job^000000");
                     itemdesctable.WriteLine("#");
@@ -252,7 +281,7 @@ namespace Destiny.Main.Data
 
                     itemrestable.WriteLine(nextID.ToString() + "#" + spr_ + "#");
 
-                    itemslotcounttable.WriteLine(nextID.ToString() + "##");
+                    itemslotcounttable.WriteLine(nextID.ToString() + "#" + slot + "#");
 
                     accname.WriteLine(",");
                     accname.Write("\t[ACCESSORY_IDs.ACCESSORY_" + spr_ + "] = \"_" + spr_ + "\"");
@@ -260,7 +289,7 @@ namespace Destiny.Main.Data
                     accessoryid.WriteLine(",");
                     accessoryid.Write("\tACCESSORY_" + spr_ + " = " + nextView);
 
-                    dataGridViewSPR.Rows.Add(new String[] { nextID.ToString(), spr, nextView.ToString() });
+                    itemdb.WriteLine(script);
                 }
                 itemdesctable.Close();
                 itemdisplaynametable.Close();
@@ -268,11 +297,12 @@ namespace Destiny.Main.Data
                 itemslotcounttable.Close();
                 accessoryid.Close();
                 accname.Close();
+                itemdb.Close();
                 MessageBox.Show("Finish");
             }
             else
             {
-                MessageBox.Show("Input next Item ID Number");
+                MessageBox.Show("No Row Data");
             }
         }
 
@@ -281,10 +311,14 @@ namespace Destiny.Main.Data
             DataGridViewRow _row = dataGridViewSPR.SelectedRows[0];
             int id = int.Parse(_row.Cells["ID"].Value.ToString());
             int view = int.Parse(_row.Cells["View"].Value.ToString());
-            FormItem _form = new FormItem(id, toUnderScore(_row.Cells["SPR"].Value.ToString()), 0, view);
+            FormItem _form = new FormItem(id, toUnderScore(_row.Cells["SPR"].Value.ToString()), view);
             _form.ShowDialog();
             if (_form.result != "")
+            {
+                _row.Cells["Location"].Value = _form.position;
+                _row.Cells["Slot"].Value = _form.slot;
                 _row.Cells["Script"].Value = _form.result;
+            }
             _form.Dispose();
         }
 
@@ -300,6 +334,25 @@ namespace Destiny.Main.Data
             textBoxPathSPRWoman.Text = ClassGlobal._pathSPRWoman;
             textBoxPathItemCollection.Text = ClassGlobal._pathItemCollection;
             textBoxPathItemIcon.Text = ClassGlobal._pathItemIcon;
+        }
+
+        private void buttonDeleteLastData_Click(object sender, EventArgs e)
+        {
+            deleteFileInFolder(textBoxPathSPRDrop.Text);
+            deleteFileInFolder(textBoxPathSPRMan.Text);
+            deleteFileInFolder(textBoxPathSPRWoman.Text);
+            deleteFileInFolder(textBoxPathItemCollection.Text);
+            deleteFileInFolder(textBoxPathItemIcon.Text);
+            MessageBox.Show("Selesai");
+        }
+
+        private void deleteFileInFolder(string path)
+        {
+            DirectoryInfo _folder = new DirectoryInfo(path);
+            foreach (FileInfo _file in _folder.GetFiles())
+            {
+                _file.Delete();
+            }
         }
     }
 }
